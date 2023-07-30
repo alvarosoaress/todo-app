@@ -1,5 +1,7 @@
 import { COLORS, FONT, SIZES } from '@/assets/Theme';
 import Checkbox from '@/components/Checkbox';
+import isBlank from '@/components/utils';
+import { addTodo } from '@/database';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
@@ -42,6 +44,12 @@ export default function AddTodo() {
       keyboardDidShowListener.remove();
     };
   }, []);
+
+  async function handleSubmit() {
+    if (!isBlank(title)) {
+      await addTodo(title, description);
+    }
+  }
 
   return (
     <SafeAreaView
@@ -98,10 +106,7 @@ export default function AddTodo() {
         columnWrapperStyle={{ gap: SIZES.large * 2, alignSelf: 'center' }}
         renderItem={({ item }) => <Checkbox text="Urgente" fillColor="red" />}
         ListFooterComponent={
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => console.log(description)}
-          >
+          <TouchableOpacity style={styles.btn} onPress={() => handleSubmit()}>
             <Text style={styles.btnText}>Adicionar</Text>
           </TouchableOpacity>
         }

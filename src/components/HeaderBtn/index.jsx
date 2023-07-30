@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: SIZES.medium,
   },
   btnIcon: {
     width: 25,
     height: 25,
-    margin: SIZES.xxSmall,
     textAlign: 'center',
     padding: 0,
   },

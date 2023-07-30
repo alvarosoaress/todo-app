@@ -1,17 +1,26 @@
-import { COLORS, SIZES } from '@/assets/Theme';
-import AddButton from '@/components/AddButton';
-import TodoCard from '@/components/TodoCard';
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import {
   SafeAreaView,
   FlatList,
   StyleSheet,
-  TextInput,
+  Pressable,
   View,
 } from 'react-native';
+import { COLORS, SIZES } from '@/assets/Theme';
+import AddButton from '@/components/AddButton';
+import TodoCard from '@/components/TodoCard';
+import { getTodos } from '@/database';
 
 export default function Home() {
   const data = [1, 2, 4, 8, 7, 9, 1, 1, 2, 4, 5, 7];
+  const [todos, setTodos] = useState([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      getTodos().then((res) => setTodos(res));
+    }, []),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,6 +36,10 @@ export default function Home() {
           }}
         />
       </View> */}
+      {/* <Pressable
+        onPress={() => console.log(todos)}
+        style={{ width: 50, height: 50, backgroundColor: 'red' }}
+      /> */}
       <AddButton />
       <FlatList
         data={data}

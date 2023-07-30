@@ -1,10 +1,22 @@
 import { COLORS, FONT, SIZES } from '@/assets/Theme';
+import { MotiView } from 'moti';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function TodoCard() {
+export default function TodoCard({ index }) {
   return (
-    <View style={styles.container}>
+    <MotiView
+      style={styles.container}
+      from={{
+        opacity: 0,
+        translateY: 100,
+      }}
+      animate={{
+        opacity: 1,
+        translateY: 0,
+      }}
+      transition={{ delay: 100 * index + 35 }}
+    >
       <Text style={styles.title}>Titulo</Text>
       <Text style={styles.text}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tenetur
@@ -19,7 +31,7 @@ export default function TodoCard() {
         </View>
         <Text style={styles.text}>0 dias</Text>
       </View>
-    </View>
+    </MotiView>
   );
 }
 

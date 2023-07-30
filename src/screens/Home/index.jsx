@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 export default function Home() {
-  const data = [1, 2, 4, 8, 7, 9, 1, 1, 2, 4, 7];
+  const data = [1, 2, 4, 8, 7, 9, 1, 1, 2, 4, 5, 7];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +30,7 @@ export default function Home() {
       <AddButton />
       <FlatList
         data={data}
-        renderItem={TodoCard}
+        renderItem={({ item, index }) => <TodoCard index={index} />}
         fadingEdgeLength={25}
         showsVerticalScrollIndicator={false}
       />

@@ -1,8 +1,3 @@
-import { COLORS, FONT, SIZES } from '@/assets/Theme';
-import Checkbox from '@/components/Checkbox';
-import isBlank from '@/components/utils';
-import { addTodo } from '@/database';
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
   TextInput,
@@ -14,10 +9,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Animated, { ZoomIn } from 'react-native-reanimated';
+import { COLORS, FONT, SIZES } from '@/assets/Theme';
+import Checkbox from '@/components/Checkbox';
+import { isBlank, toastSuccess, toastWarn } from '@/components/utils';
+import { addTodo } from '@/database';
+import CloseBtn from '@/components/CloseBtn';
 
-export default function AddTodo() {
-  const navigation = useNavigation();
-
+export default function AddTodo({ navigation }) {
   const [title, setTitle] = useState('');
 
   const [description, setDescription] = useState('');
@@ -48,6 +46,10 @@ export default function AddTodo() {
   async function handleSubmit() {
     if (!isBlank(title)) {
       await addTodo(title, description);
+      navigation.goBack();
+      toastSuccess('ToDo adicionado com sucesso!');
+    } else {
+      toastWarn('O título é obrigatório');
     }
   }
 
@@ -77,6 +79,8 @@ export default function AddTodo() {
             ]}
             onTouchEnd={(e) => e.stopPropagation()}
           >
+            <CloseBtn navigation={navigation} />
+
             <Text style={styles.title}>Novo ToDo</Text>
 
             <TextInput

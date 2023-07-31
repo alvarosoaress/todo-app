@@ -5,7 +5,7 @@ import { COLORS, SIZES } from '@/assets/Theme';
 import TodoCard from '@/components/TodoCard';
 import { getTodos } from '@/database';
 
-export default function Home() {
+export default function Completed() {
   const [todos, setTodos] = useState([]);
 
   useFocusEffect(
@@ -15,7 +15,7 @@ export default function Home() {
       getTodos().then((res) =>
         setTodos(
           res
-            .filter((item) => !item.completed)
+            .filter((item) => item.completed)
             .sort((a, b) => b.createdAt.seconds - a.createdAt.seconds),
         ),
       );

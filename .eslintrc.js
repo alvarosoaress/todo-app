@@ -3,13 +3,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'airbnb/hooks',
-    'prettier',
-    '@react-native-community',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'airbnb/hooks', 'prettier'],
   settings: {
     'import/resolver': {
       'babel-module': {},

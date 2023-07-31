@@ -1,11 +1,27 @@
-import { COLORS, FONT, SIZES } from '@/assets/Theme';
-import { MotiView } from 'moti';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { COLORS, FONT, SIZES } from '@/assets/Theme';
 
-export default function TodoCard({ index }) {
+export default function TodoCard({ index, todo }) {
+  const navigation = useNavigation();
+
+  const fireBaseTime = new Date(
+    todo.createdAt.seconds * 1000 + todo.createdAt.nanoseconds / 1000000,
+  );
+
+  const currentTime = new Date();
+
+  // Calculando a diferença entre as data em Ms
+  const diffMs = Math.abs(currentTime.getTime() - fireBaseTime.getTime());
+
+  // (Ms * 1000 = Secs) (Secs * 60 = Min) (Min * 60 = Hours) (Hours * 24 = Days)
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
   return (
-    <MotiView
+    <TouchableOpacity
+      onPress={() => navigation.navigate('todoDetails', { todo })}
+      activeOpacity={0.6}
       style={styles.container}
       from={{
         opacity: 0,
@@ -17,11 +33,11 @@ export default function TodoCard({ index }) {
       }}
       transition={{ delay: 100 * index + 35 }}
     >
-      <Text style={styles.title}>Titulo</Text>
+      <Text style={styles.title}>{todo?.title}</Text>
       <Text style={styles.text}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tenetur
-        cupiditate perferendis, saepe architecto, dolorum officiis aliquid
-        incidunt ...
+        {todo?.description.length > 145
+          ? `${todo?.description.slice(0, 145)} ...`
+          : todo?.description}
       </Text>
       <View style={styles.infoContainer}>
         <View style={styles.tagContainer}>
@@ -29,9 +45,11 @@ export default function TodoCard({ index }) {
           <Text style={styles.tag2}>TAG 2</Text>
           <Text style={styles.tag3}>TAG 3</Text>
         </View>
-        <Text style={styles.text}>0 dias</Text>
+        <Text style={styles.text}>
+          {diffDays} {diffDays > 1 ? 'dias' : 'dia'}
+        </Text>
       </View>
-    </MotiView>
+    </TouchableOpacity>
   );
 }
 

@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import FlashMessage from 'react-native-flash-message';
 import Routes from '@/screens/Routes';
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -26,5 +27,10 @@ export default function App() {
   // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
   SplashScreen.hideAsync();
 
-  return <Routes />;
+  return (
+    <>
+      <Routes />
+      <FlashMessage position="top" />
+    </>
+  );
 }

@@ -18,6 +18,17 @@ export default function TodoCard({ index, todo }) {
   // (Ms * 1000 = Secs) (Secs * 60 = Min) (Min * 60 = Hours) (Hours * 24 = Days)
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
+  // Contando quantas quebras de linhas existem na descrição
+  // Split para que a cada ocorrência de quebra de linha o texto seja cortado
+  // gerando um array de textos
+  // depois cortando esse array até a 4 posição, e juntando novamente a string
+  // separando as linhas com \n
+  const todoDescription = todo?.description.split('\n').slice(0, 5).join('\n');
+
+  // length - 1 pois todos textos tem 1 linha de padrão
+  // queremos saber apenas as linhas a mais que o texto tenha
+  const descriptionLines = todo.description.split('\n').length - 1;
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('todoDetails', { todo })}
@@ -35,9 +46,9 @@ export default function TodoCard({ index, todo }) {
     >
       <Text style={styles.title}>{todo?.title}</Text>
       <Text style={styles.text}>
-        {todo?.description.length > 145
-          ? `${todo?.description.slice(0, 145)} ...`
-          : todo?.description}
+        {todoDescription.length > 145 || descriptionLines > 3
+          ? `${todoDescription.slice(0, 145)} ...`
+          : todoDescription}
       </Text>
       <View style={styles.infoContainer}>
         <View style={styles.tagContainer}>

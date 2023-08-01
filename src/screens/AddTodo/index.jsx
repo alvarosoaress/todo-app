@@ -66,7 +66,7 @@ export default function AddTodo({ navigation }) {
         entering={ZoomIn}
         data={[1, 2, 5, 4]}
         style={styles.flatList}
-        // contentContainerStyle modifica as props dos childrens
+        // contentContainerStyle modifica as props dos children
         // gap é uma prop que mexe diretamente com children então é necessário
         contentContainerStyle={{ gap: SIZES.xxLarge }}
         // Prevenindo que ao tocar no foreground esconda todo o modal

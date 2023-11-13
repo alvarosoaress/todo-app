@@ -2,13 +2,15 @@ import {
   DrawerActions,
   NavigationContainer,
   useNavigation,
+  getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { COLORS, FONT, SIZES } from '@/assets/Theme';
 import HeaderBtn from '@/components/HeaderBtn';
 import AddButton from '@/components/AddButton';
@@ -17,6 +19,7 @@ import AddTodo from '../AddTodo';
 import Config from '../Config';
 import TodoDetails from '../TodoDetails';
 import Completed from '../Completed';
+import Tags from '../Tags';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -104,7 +107,7 @@ function StackNavigation() {
         options={{
           presentation: 'transparentModal',
           headerShown: false,
-          animation: 'fade',
+          animation: 'fade_from_bottom',
         }}
       />
       <Stack.Screen
@@ -113,9 +116,31 @@ function StackNavigation() {
         options={{
           presentation: 'transparentModal',
           headerShown: false,
-          animation: 'fade',
+          animation: 'fade_from_bottom',
         }}
       />
+    </Stack.Navigator>
+  );
+}
+
+function ConfigStackNavigation() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerTitleAlign: 'left',
+        headerStyle: { backgroundColor: COLORS.gray },
+        headerTitleStyle: {
+          fontFamily: FONT.boldText,
+          color: COLORS.text,
+          marginLeft: -SIZES.xxSmall,
+        },
+        headerTintColor: COLORS.bgContrast,
+        animation: 'slide_from_right',
+      }}
+    >
+      <Stack.Screen name="config" component={Config} />
+      <Stack.Screen name="tags" component={Tags} />
     </Stack.Navigator>
   );
 }
@@ -172,10 +197,14 @@ function DrawerNavigation() {
         }}
       />
       <Drawer.Screen
-        name="config"
-        component={Config}
-        options={{
-          headerTitle: 'Configurações',
+        name="configDrawer"
+        component={ConfigStackNavigation}
+        options={({ route }) => ({
+          swipeEnabled: false,
+          headerTitle:
+            getFocusedRouteNameFromRoute(route) === 'tags'
+              ? 'Minhas tags'
+              : 'Configurações',
           drawerLabel: 'Configurações',
           drawerIcon: ({ focused }) => (
             <MaterialCommunityIcons
@@ -184,7 +213,29 @@ function DrawerNavigation() {
               color={COLORS.bgContrast}
             />
           ),
-        }}
+          headerLeft: () => {
+            if (getFocusedRouteNameFromRoute(route) !== 'tags') {
+              return (
+                <HeaderBtn
+                  iconName="menu"
+                  dimension={30}
+                  // Abrindo o drawer com o botão Left da HeaderBtn
+                  // Usando dispatch para disparar um evento ao ser clicado
+                  handlePress={() =>
+                    navigation.dispatch(DrawerActions.openDrawer())
+                  }
+                />
+              );
+            }
+            return (
+              <HeaderBtn
+                iconName="chevron-small-left"
+                dimension={30}
+                handlePress={() => navigation.goBack()}
+              />
+            );
+          },
+        })}
       />
     </Drawer.Navigator>
   );

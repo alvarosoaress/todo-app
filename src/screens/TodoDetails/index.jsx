@@ -52,7 +52,13 @@ export default function TodoDetails({ navigation, route }) {
         <Text style={styles.title}>{todo?.title}</Text>
 
         {todo?.description ? (
-          <Text style={styles.description}>{todo?.description}</Text>
+          <Text
+            style={styles.description}
+            selectable
+            selectionColor={COLORS.primary}
+          >
+            {todo?.description}
+          </Text>
         ) : null}
 
         <View style={styles.tagContainer}>

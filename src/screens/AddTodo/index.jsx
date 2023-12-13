@@ -59,15 +59,10 @@ export default function AddTodo({ navigation }) {
       // Ao tocar no background esconda o modal
       onTouchEnd={() => navigation.goBack()}
     >
-      {/* // Utilizando uma FlatList com listHeader e listFooter ao invés de
-        uma ScrollView com uma FlatList nested para evitar o erro de
-        Virtualized Lists should never be nested inside plain Scrollview */}
       <Animated.FlatList
         entering={ZoomIn}
         data={[1, 2, 5, 4]}
         style={styles.flatList}
-        // contentContainerStyle modifica as props dos children
-        // gap é uma prop que mexe diretamente com children então é necessário
         contentContainerStyle={{ gap: SIZES.xxLarge }}
         // Prevenindo que ao tocar no foreground esconda todo o modal
         onTouchEnd={(e) => e.stopPropagation()}
@@ -108,6 +103,7 @@ export default function AddTodo({ navigation }) {
         }
         numColumns={2}
         columnWrapperStyle={{ gap: SIZES.large * 2, alignSelf: 'center' }}
+        // Trocar text para item especifico
         renderItem={({ item }) => <Checkbox text="Urgente" fillColor="red" />}
         ListFooterComponent={
           <TouchableOpacity style={styles.btn} onPress={() => handleSubmit()}>

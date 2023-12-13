@@ -1,4 +1,4 @@
-<h1 align="center">Todo-App</h1>
+<h1 align="center">Todo App</h1>
 
  <blockquote>
      <p align="center">Aplicação mobile para gerencia de tarefas</p>
@@ -73,9 +73,9 @@ yarn start
 
 > Saída:
 >> `QrCode Image`
->> 
+>>
 >> Metro waiting on exp://192.168.1.198:8080
->> 
+>>
 >> Scan the QR code above with Expo Go (Android) or the Camera app (iOS)
 
 - <kbd>5</kbd> Pronto! Agora já é possível visualizar o projeto, se quiser ver pelo mobile, basta escanear o `QrCode` usando o `Expo Go`, caso tenha um emulador, apenas digite <kbd>a</kbd> no terminal.
@@ -93,7 +93,7 @@ yarn start
 - [ ] Criar uma logo para o aplicativo.
 
 <!--
-Todo-App
+Todo App
 3
 
 JavaScript;ReactNative;FireBase;Expo;Android;iOS

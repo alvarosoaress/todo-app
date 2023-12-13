@@ -95,7 +95,7 @@ Todo-App
 3
 
 JavaScript;ReactNative;FireBase;Expo;Android;iOS
-https://github.com/alvarosoaress/Comandas/assets/13721147/51de685b-26c2-4bbf-b4bf-3110f7909d2c
+https://github.com/alvarosoaress/todo-app/assets/13721147/aa429c94-1480-43d9-af03-e944c09e0ffb
 Aplicativo de tarefas pessoais focado em ser simples e eficiente, com interface minimalista, opções fáceis e backup das tarefas na nuvem através da FireBase.
 available
 -->

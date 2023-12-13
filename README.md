@@ -5,7 +5,7 @@
  </blockquote>
 
 <div align="center">
-    <image src=""/>
+    <image src="https://github.com/alvarosoaress/todo-app/assets/13721147/aa429c94-1480-43d9-af03-e944c09e0ffb" width=300 />
 </div>
 
 ## 🧠 Descrição do Projeto
@@ -32,7 +32,7 @@ Aplicativo de tarefas pessoais focado em ser simples e eficiente, com interface 
   Vídeo Exemplo
   </summary>
 
-  <https://github.com/alvarosoaress/Divino-Sabor/assets/13721147/76c21e77-80a4-4786-bfc0-9ba78a425488>
+  <https://github.com/alvarosoaress/todo-app/assets/13721147/3574b9c0-2fdc-492d-a98a-426f0ce26cab>
 
   </details>
   </blockquote>
